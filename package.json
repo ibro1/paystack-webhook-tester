@@ -1,0 +1,30 @@
+{
+  "name": "paystack-webhook-tester",
+  "version": "0.1.0",
+  "description": "Local development server, simulator, and testing dashboard for Paystack webhooks.",
+  "type": "module",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "bin": {
+    "paystack-webhook-tester": "./dist/src/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/src/cli.js serve",
+    "test": "tsc && node --test dist/test/**/*.test.js"
+  },
+  "keywords": [
+    "paystack",
+    "webhooks",
+    "testing",
+    "simulator",
+    "fintech",
+    "developer-tools"
+  ],
+  "author": "ibro1 <ibro1@users.noreply.github.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "typescript": "^5.8.2"
+  }
+}
