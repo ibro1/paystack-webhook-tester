@@ -58,11 +58,16 @@ The tool must satisfy the following acceptance criteria:
      - `POST /api/sign`: compute signature for given payload and secret.
      - `POST /api/verify`: verify signature for given payload and secret.
      - `POST /api/dispatch`: send webhook to target and return execution record.
-     - `GET /api/history`: retrieve list of dispatched and ingested events.
+     - `GET /api/history`: retrieve the list of ingested events (newest first); `DELETE /api/history` clears it.
      - `GET /api/health`: return server health status.
 
-7. **Command Line Interface (CLI)**
+7. **Dispatch Targets**
+   - A relative target such as `/api/ingest` is delivered to the running server itself, so the dashboard works behind a reverse proxy or login.
+   - A dispatch with no target is answered with HTTP 400.
+   - In self-only mode (`--self-only` or `DISPATCH_SELF_ONLY=1`), any target outside the server is refused with HTTP 400 and nothing is sent. Public demos run in this mode so the server cannot be used to reach other hosts.
+
+8. **Command Line Interface (CLI)**
    - `paystack-webhook-tester sign --payload '<json>' --secret '<key>'`: print HMAC-SHA512 signature.
    - `paystack-webhook-tester verify --payload '<json>' --signature '<sig>' --secret '<key>'`: verify signature and exit with code 0 or 1.
    - `paystack-webhook-tester dispatch --event <name> --target <url> --secret '<key>'`: send event to target.
-   - `paystack-webhook-tester serve --port <port>`: start the web dashboard and API server.
+   - `paystack-webhook-tester serve --port <port> [--self-only]`: start the web dashboard and API server.
