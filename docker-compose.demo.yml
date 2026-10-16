@@ -16,21 +16,21 @@ services:
     configs:
       - source: boot_cjs
         target: /boot.cjs
-      - source: dist_src_cli_js
+      - source: dist_src_cli_js_9e3baca6
         target: /files/dist__src__cli.js
-      - source: dist_src_dispatcher_js
+      - source: dist_src_dispatcher_js_1b2df5aa
         target: /files/dist__src__dispatcher.js
-      - source: dist_src_index_js
+      - source: dist_src_index_js_0590f500
         target: /files/dist__src__index.js
-      - source: dist_src_server_js
+      - source: dist_src_server_js_b6cf2f3b
         target: /files/dist__src__server.js
-      - source: dist_src_signature_js
+      - source: dist_src_signature_js_4b2db651
         target: /files/dist__src__signature.js
-      - source: dist_src_templates_js
+      - source: dist_src_templates_js_287a741d
         target: /files/dist__src__templates.js
-      - source: dist_src_ui_js
+      - source: dist_src_ui_js_d4f8eaf6
         target: /files/dist__src__ui.js
-      - source: package_json
+      - source: package_json_165b0514
         target: /files/package.json
 configs:
   boot_cjs:
@@ -41,7 +41,7 @@ configs:
         fs.mkdirSync(require('path').dirname(target), { recursive: true });
         fs.writeFileSync(target, Buffer.from(fs.readFileSync('/files/' + f, 'utf8').replace(/\s+/g, ''), 'base64'));
       }
-  dist_src_cli_js:
+  dist_src_cli_js_9e3baca6:
     content: |
       IyEvdXNyL2Jpbi9lbnYgbm9kZQppbXBvcnQgeyBXZWJob29rU2VydmVyIH0gZnJvbSAnLi9zZXJ2
       ZXIuanMnOwppbXBvcnQgeyBnZW5lcmF0ZVNpZ25hdHVyZSwgdmVyaWZ5U2lnbmF0dXJlIH0gZnJv
@@ -148,7 +148,7 @@ configs:
       ICAgICAgIHNob3dIZWxwKCk7CiAgICAgICAgICAgIGJyZWFrOwogICAgfQp9Cm1haW4oKS5jYXRj
       aCgoZXJyKSA9PiB7CiAgICBjb25zb2xlLmVycm9yKCdGYXRhbDonLCBlcnIpOwogICAgcHJvY2Vz
       cy5leGl0KDEpOwp9KTsK
-  dist_src_dispatcher_js:
+  dist_src_dispatcher_js_1b2df5aa:
     content: |
       aW1wb3J0IHsgZ2VuZXJhdGVTaWduYXR1cmUgfSBmcm9tICcuL3NpZ25hdHVyZS5qcyc7Ci8qKgog
       KiBEaXNwYXRjaGVzIGEgc2ltdWxhdGVkIFBheXN0YWNrIHdlYmhvb2sgdG8gdGhlIHRhcmdldCBV
@@ -183,7 +183,7 @@ configs:
       ICAgICAgaGVhZGVyc1NlbnQ6IHJlcXVlc3RIZWFkZXJzLAogICAgICAgIHJlc3BvbnNlQm9keSwK
       ICAgICAgICAuLi4oZXJyb3JNc2cgPyB7IGVycm9yOiBlcnJvck1zZyB9IDoge30pLAogICAgfTsK
       fQo=
-  dist_src_index_js:
+  dist_src_index_js_0590f500:
     content: |
       ZXhwb3J0IHsgZ2VuZXJhdGVTaWduYXR1cmUsIHZlcmlmeVNpZ25hdHVyZSwgfSBmcm9tICcuL3Np
       Z25hdHVyZS5qcyc7CmV4cG9ydCB7IFRFTVBMQVRFUywgbGlzdFRlbXBsYXRlcywgZ2V0VGVtcGxh
@@ -191,7 +191,7 @@ configs:
       ZnJvbSAnLi9kaXNwYXRjaGVyLmpzJzsKZXhwb3J0IHsgV2ViaG9va1NlcnZlciwgfSBmcm9tICcu
       L3NlcnZlci5qcyc7CmV4cG9ydCB7IGdldERhc2hib2FyZEh0bWwsIH0gZnJvbSAnLi91aS5qcyc7
       Cg==
-  dist_src_server_js:
+  dist_src_server_js_b6cf2f3b:
     content: |
       aW1wb3J0IGh0dHAgZnJvbSAnbm9kZTpodHRwJzsKaW1wb3J0IHsgZ2VuZXJhdGVTaWduYXR1cmUs
       IHZlcmlmeVNpZ25hdHVyZSB9IGZyb20gJy4vc2lnbmF0dXJlLmpzJzsKaW1wb3J0IHsgbGlzdFRl
@@ -354,7 +354,7 @@ configs:
       YWRKc29uQm9keShyZXEpIHsKICAgICAgICBjb25zdCByYXcgPSBhd2FpdCB0aGlzLnJlYWRSYXdC
       b2R5KHJlcSk7CiAgICAgICAgaWYgKCFyYXcudHJpbSgpKQogICAgICAgICAgICByZXR1cm4ge307
       CiAgICAgICAgcmV0dXJuIEpTT04ucGFyc2UocmF3KTsKICAgIH0KfQo=
-  dist_src_signature_js:
+  dist_src_signature_js_4b2db651:
     content: |
       aW1wb3J0IGNyeXB0byBmcm9tICdub2RlOmNyeXB0byc7Ci8qKgogKiBDb21wdXRlcyB0aGUgUGF5
       c3RhY2sgSE1BQy1TSEE1MTIgc2lnbmF0dXJlIGZvciBhIHdlYmhvb2sgcGF5bG9hZC4KICoKICog
@@ -388,7 +388,7 @@ configs:
       YWxzZTsKICAgICAgICB9CiAgICAgICAgcmV0dXJuIGNyeXB0by50aW1pbmdTYWZlRXF1YWwoZXhw
       ZWN0ZWRCdWZmZXIsIHByb3ZpZGVkQnVmZmVyKTsKICAgIH0KICAgIGNhdGNoIHsKICAgICAgICBy
       ZXR1cm4gZmFsc2U7CiAgICB9Cn0K
-  dist_src_templates_js:
+  dist_src_templates_js_287a741d:
     content: |
       ZXhwb3J0IGNvbnN0IFRFTVBMQVRFUyA9IHsKICAgICdjaGFyZ2Uuc3VjY2Vzcyc6IHsKICAgICAg
       ICBldmVudDogJ2NoYXJnZS5zdWNjZXNzJywKICAgICAgICBkYXRhOiB7CiAgICAgICAgICAgIGlk
@@ -548,7 +548,7 @@ configs:
       LiBBdmFpbGFibGU6ICR7bGlzdFRlbXBsYXRlcygpLmpvaW4oJywgJyl9YCk7CiAgICB9CiAgICAv
       LyBSZXR1cm4gZGVlcCBjbG9uZSBzbyBjYWxsZXIgbXV0YXRpb25zIGRvIG5vdCBhbHRlciB0ZW1w
       bGF0ZQogICAgcmV0dXJuIEpTT04ucGFyc2UoSlNPTi5zdHJpbmdpZnkodGVtcGxhdGUpKTsKfQo=
-  dist_src_ui_js:
+  dist_src_ui_js_d4f8eaf6:
     content: |
       ZXhwb3J0IGZ1bmN0aW9uIGdldERhc2hib2FyZEh0bWwoKSB7CiAgICByZXR1cm4gYDwhRE9DVFlQ
       RSBodG1sPgo8aHRtbCBsYW5nPSJlbiI+CjxoZWFkPgogIDxtZXRhIGNoYXJzZXQ9IlVURi04Ij4K
@@ -933,7 +933,7 @@ configs:
       biAnJzsKICAgICAgcmV0dXJuIHN0ci5yZXBsYWNlKC8mL2csICcmYW1wOycpLnJlcGxhY2UoLzwv
       ZywgJyZsdDsnKS5yZXBsYWNlKC8+L2csICcmZ3Q7Jyk7CiAgICB9CgogICAgd2luZG93Lm9ubG9h
       ZCA9IGluaXQ7CiAgPC9zY3JpcHQ+CjwvYm9keT4KPC9odG1sPmA7Cn0K
-  package_json:
+  package_json_165b0514:
     content: |
       ewogICJuYW1lIjogInBheXN0YWNrLXdlYmhvb2stdGVzdGVyIiwKICAidmVyc2lvbiI6ICIwLjEu
       MCIsCiAgImRlc2NyaXB0aW9uIjogIkxvY2FsIGRldmVsb3BtZW50IHNlcnZlciwgc2ltdWxhdG9y

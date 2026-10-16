@@ -4,12 +4,16 @@
 // small boot script unpacks them before the server starts.
 // Usage: npm run build && node scripts/make-demo-compose.mjs > docker-compose.demo.yml
 import { readFileSync, readdirSync } from "node:fs";
+import { createHash } from "node:crypto";
 
 const files = [
   ...readdirSync("dist/src").filter((f) => f.endsWith(".js")).sort().map((f) => `dist/src/${f}`),
   "package.json",
 ];
-const name = (f) => f.replace(/\W/g, "_");
+// The content hash in each config name makes a changed file a new config, so a redeploy
+// recreates the container instead of keeping the old files.
+const hash = (f) => createHash("sha256").update(readFileSync(f)).digest("hex").slice(0, 8);
+const name = (f) => `${f.replace(/\W/g, "_")}_${hash(f)}`;
 const wrap = (s) => s.match(/.{1,76}/g).map((l) => "      " + l).join("\n");
 const boot = [
   "const fs = require('fs');",
