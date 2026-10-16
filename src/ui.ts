@@ -301,7 +301,7 @@ export function getDashboardHtml(): string {
 
             <div class="btn-group">
               <button class="btn btn-primary" onclick="dispatchWebhookEvent()" id="btnDispatch">
-                🚀 Dispatch Webhook
+                Dispatch Webhook
               </button>
             </div>
           </div>
@@ -338,7 +338,7 @@ export function getDashboardHtml(): string {
         <div class="card-title">
           <span>Incoming Webhook Receiver</span>
           <div class="btn-group">
-            <button class="btn btn-secondary btn-sm" onclick="refreshHistory()">🔄 Refresh</button>
+            <button class="btn btn-secondary btn-sm" onclick="refreshHistory()">Refresh</button>
             <button class="btn btn-secondary btn-sm" onclick="clearHistory()">Clear Feed</button>
           </div>
         </div>
@@ -499,7 +499,7 @@ export function getDashboardHtml(): string {
         });
       } finally {
         btn.disabled = false;
-        btn.innerText = '🚀 Dispatch Webhook';
+        btn.innerText = 'Dispatch Webhook';
       }
     }
 
