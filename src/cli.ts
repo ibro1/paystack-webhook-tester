@@ -38,6 +38,7 @@ Commands:
     --port <port>            Port to listen on (default: 3000)
     --host <host>            Host to bind to (default: 0.0.0.0)
     --secret <secretKey>     Default secret key for verification
+    --self-only              Only dispatch to paths on this server (for public demos)
 
   sign                       Compute HMAC-SHA512 x-paystack-signature
     --payload <json>         Payload string or JSON
@@ -72,10 +73,12 @@ async function main() {
       const port = parseInt(options.port || process.env.PORT || '3000', 10);
       const host = options.host || '0.0.0.0';
       const secretKey = options.secret || process.env.PAYSTACK_SECRET_KEY || 'sk_test_demo1234567890abcdef';
-      const server = new WebhookServer({ port, host, secretKey });
+      const selfOnly = options['self-only'] === 'true' || process.env.DISPATCH_SELF_ONLY === '1';
+      const server = new WebhookServer({ port, host, secretKey, selfOnly });
       const runningPort = await server.start();
       console.log(`Paystack Webhook Tester running at http://${host === '0.0.0.0' ? 'localhost' : host}:${runningPort}`);
       console.log(`Webhook Ingest Endpoint: http://${host === '0.0.0.0' ? 'localhost' : host}:${runningPort}/api/ingest`);
+      if (selfOnly) console.log('Self-only mode: dispatches go only to paths on this server.');
       break;
     }
 

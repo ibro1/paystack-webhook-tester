@@ -19,6 +19,8 @@ export interface ServerOptions {
   host?: string;
   secretKey?: string;
   maxHistory?: number;
+  /** Refuse dispatch targets outside this server (for public demos). */
+  selfOnly?: boolean;
 }
 
 export class WebhookServer {
@@ -28,12 +30,14 @@ export class WebhookServer {
   public host: string;
   public secretKey: string;
   private maxHistory: number;
+  private selfOnly: boolean;
 
   constructor(options: ServerOptions = {}) {
     this.port = options.port ?? 3000;
     this.host = options.host ?? '0.0.0.0';
     this.secretKey = options.secretKey ?? 'sk_test_demo1234567890abcdef';
     this.maxHistory = options.maxHistory ?? 100;
+    this.selfOnly = options.selfOnly ?? false;
   }
 
   public getHistory(): IngestRecord[] {
@@ -151,8 +155,14 @@ export class WebhookServer {
     // Dispatch webhook
     if (method === 'POST' && pathname === '/api/dispatch') {
       const body = await this.readJsonBody(req);
+      const target = this.resolveTarget(body.targetUrl);
+      if ('error' in target) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: target.error }));
+        return;
+      }
       const result = await dispatchWebhook({
-        targetUrl: body.targetUrl,
+        targetUrl: target.url,
         payload: body.payload,
         secretKey: body.secretKey || this.secretKey,
         headers: body.headers,
@@ -214,6 +224,32 @@ export class WebhookServer {
 
     res.writeHead(404, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ error: 'Endpoint not found' }));
+  }
+
+  /**
+   * Turns a dispatch target into an absolute URL. A path such as /api/ingest
+   * points at this server; in self-only mode nothing else is allowed.
+   */
+  private resolveTarget(targetUrl: unknown): { url: string } | { error: string } {
+    if (typeof targetUrl !== 'string' || !targetUrl.trim()) {
+      return { error: 'targetUrl is required' };
+    }
+    const target = targetUrl.trim();
+    if (target.startsWith('/') && !target.startsWith('//')) {
+      return { url: `http://127.0.0.1:${this.port}${target}` };
+    }
+    if (this.selfOnly) {
+      return { error: 'This server runs in self-only mode: dispatch to a path on this server, such as /api/ingest' };
+    }
+    try {
+      const url = new URL(target);
+      if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+        return { error: 'targetUrl must be an http or https URL' };
+      }
+      return { url: url.toString() };
+    } catch {
+      return { error: 'targetUrl is not a valid URL' };
+    }
   }
 
   private readRawBody(req: http.IncomingMessage): Promise<string> {

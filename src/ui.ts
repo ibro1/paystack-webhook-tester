@@ -433,7 +433,7 @@ export function getDashboardHtml(): string {
     }
 
     function useLocalIngest() {
-      document.getElementById('targetUrl').value = window.location.origin + '/api/ingest';
+      document.getElementById('targetUrl').value = '/api/ingest';
     }
 
     function formatPayload() {

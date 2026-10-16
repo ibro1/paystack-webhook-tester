@@ -19,4 +19,4 @@ COPY --from=builder /app/dist ./dist
 
 EXPOSE 3000
 
-CMD ["node", "dist/src/cli.js", "serve", "--port", "3000", "--host", "0.0.0.0"]
+CMD ["node", "dist/src/cli.js", "serve", "--port", "3000", "--host", "0.0.0.0", "--self-only"]
