@@ -8,6 +8,10 @@ It has no runtime dependencies and comes as a web dashboard, a CLI and a small T
 
 **Live demo:** https://paystack-webhook-tester.lab.linkfa.de (a lab demo that runs in self-only mode and stays up for 14 days)
 
+## What it does
+
+Paystack Webhook Tester gives developers and Nigerian businesses a clean, zero-dependency local simulator and UI for testing Paystack webhook payloads with real HMAC-SHA512 signatures. It lets you select event templates, edit payloads, verify signatures, test handlers locally without public tunnels, and inspect incoming webhook events in real time.
+
 ## Why
 
 Your Paystack webhook handler is the code that marks an order as paid, so it needs testing. Testing it against real sandbox payments is slow. You also can't easily make Paystack send a `transfer.failed` or an `invoice.payment_failed` on demand, and you need a public tunnel before anything can reach `localhost`. This tool sends the same request Paystack would send, signed the same way, straight to `http://localhost:3000/your/webhook`:
